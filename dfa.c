@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <time.h>
 #define MAX 20
-#define STATES_MAX 10
 #define STRING_LENGHT_MAX 42
 
 void latexprint(int wo[MAX], int ri, int piv, int w);     //Prints the instant description by state
@@ -51,7 +50,6 @@ int random_number(int min_num, int max_num){
     hi_num = min_num;
   }
 
-  srand(time(NULL));
   result = (rand() % (hi_num - low_num)) + low_num;
   return result;
 }
@@ -99,10 +97,11 @@ int main(){
     printf("%d ", rn[i]);
   }
 
+  printf("\n");
   int w, aux4, wo[MAX];                                   //Ask the lenght of the string
-  //scanf("%d", &w);
+  w = random_number(1, 20);
 
-  for(i=0;i<STRING_LENGHT_MAX;i++){                                     //Ask the string 
+  for(i=0;i<w;i++){                              //Ask the string 
     aux4 = rand() % 2;
     wo[i] = aux4;
   }
