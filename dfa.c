@@ -8,12 +8,12 @@
 #include <stdio.h>
 #include <time.h>
 #define MAX 20
-#define STRING_LENGHT_MAX 42
 
 void latexprint(int wo[MAX], int ri, int piv, int w);     //Prints the instant description by state
 int isin(int r, int rn[MAX], int ri);                     //Verifies if the last state corresponds to a final state
 int random_number(int min_num, int max_num);
 int check_for_existance(int rn[MAX], int value, int max, int states);
+int *transition_f_values(int length);
 
 void latexprint(int wo[MAX], int ri, int piv, int w){
   for(int i=0;i<w;i=i+1){
@@ -84,7 +84,7 @@ int main(){
   srand(time(NULL));   // should only be called once
   int i, l, indx1, indx2, M[MAX][2];         
   int system(const char *command);
-  l = random_number(1, 10);                                     //Ask user how many states the automata has 
+  l = random_number(2, 10);                                     //Ask user how many states the automata has 
   printf("Number of States: %d\n", l);
 
   char str[30];
