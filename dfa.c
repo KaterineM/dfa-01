@@ -57,7 +57,7 @@ int random_number(int min_num, int max_num){
 int check_for_existance(int rn[MAX], int value, int max, int states){
   for(int i=0;i<max;i++){
     if(rn[i] == value){
-      value = random_number(0, states);
+      value = random_number(1, states);
       check_for_existance(rn, value, max, states);
     }
   }
