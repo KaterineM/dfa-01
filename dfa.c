@@ -65,24 +65,49 @@ int check_for_existance(int rn[MAX], int value, int max, int states){
   return value;
 }
 
+int *transition_f_values(int length){
+  int values[length*2];
+  FILE *file = fopen("array_for_matrix", "r");
+  
+  int i=0;
+  int num;
+  while(fscanf(file, "%d", &num) > 0) {
+    values[i] = num;
+    i++;
+  }
+  fclose(file);
+
+  return values;
+}
+
 int main(){
   srand(time(NULL));   // should only be called once
-  int i, l, aux1, aux2, M[MAX][2];         
+  int i, l, indx1, indx2, M[MAX][2];         
+  int system(const char *command);
   l = random_number(1, 10);                                     //Ask user how many states the automata has 
   printf("Number of States: %d\n", l);
 
+  char str[30];
+  sprintf(str, "ruby ./generator.rb %d",l);
+  system(str);
+
+  int *values = transition_f_values(l);
+  indx1 = 0;
+  indx2 = 1;
+  
   printf("The transition function: \n");
   for(i=0;i<l;i=i+1){  
-    aux1 = random_number(1, l);
-    aux2 = random_number(1, l);    //Ask the transition function 
-    M[i][0] = aux1;
-    M[i][1] = aux2;
+    M[i][0] = values[indx1];
+    M[i][1] = values[indx2];
    
     printf("M %d 0 = %d\n", i, M[i][0]);
     printf("M %d 1 = %d\n", i, M[i][1]);
+
+    indx1 = indx1+2;
+    indx2 = indx2+2;
   }
 
-  
+  system("rm -f array_for_matrix");
 
   int r, aux3, rn[MAX];                                   //Ask the quantity of final states
   r = random_number(1, l);
